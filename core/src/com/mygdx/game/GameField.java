@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -22,6 +23,7 @@ public class GameField extends Game {
 	private Music rainMusic;
 	private OrthographicCamera camera;
 	Player player;
+
 	@Override
 	public void create () { //загрузка всего перед запуском
 		batch = new SpriteBatch();
@@ -31,23 +33,23 @@ public class GameField extends Game {
 		player = new Player();
 		rainMusic.setLooping(true);
 		camera = new OrthographicCamera();
-		camera.setToOrtho(true, 800, 480);
+		camera.setToOrtho(true, 1024, 768);
 	}
 
 	@Override
 	public void render () { //отрабатывает 60 раз в секунду
-		ScreenUtils.clear(0, 0, 0.2f, 1);
+		Vector2 vector2 = new Vector2(player.getX(), player.getY());
+		ScreenUtils.clear(1f, 1f, 1f, 1);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
+		vector2.set(Gdx.input.getX() - player.getX(), Gdx.input.getY() - player.getY());
 		batch.begin();
-		player.update(batch);
+		player.update(batch, vector2);
 		batch.end();
 		if(Gdx.input.isTouched()){
 			Vector3 touchPos = new Vector3();
-			//bucketPos.set(bucket.x, bucket.y, 0);
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
 			player.move(touchPos);
-			camera.unproject(touchPos);
 		}
 	}
 	
