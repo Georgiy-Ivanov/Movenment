@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
-public class Bucket {
+public class Player {
     private Texture bucketImage;
     private Rectangle bucket;
     Rectangle dest;
@@ -15,7 +15,7 @@ public class Bucket {
     private float rasty;
 
 
-    public Bucket() {
+    public Player() {
         bucketImage = new Texture(Gdx.files.internal("bucket.png"));
         bucket = new Rectangle();
         bucket.x = 0;

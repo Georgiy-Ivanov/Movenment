@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 
 
-public class Drop extends Game {
+public class GameField extends Game {
 	SpriteBatch batch;
 	Texture img;
 
@@ -21,14 +21,14 @@ public class Drop extends Game {
 	private Sound dropSound;
 	private Music rainMusic;
 	private OrthographicCamera camera;
-	Bucket bucket;
+	Player player;
 	@Override
 	public void create () { //загрузка всего перед запуском
 		batch = new SpriteBatch();
 		dropImage = new Texture(Gdx.files.internal("drop.png"));
 		dropSound = Gdx.audio.newSound(Gdx.files.internal("drop.wav"));
 		rainMusic = Gdx.audio.newMusic(Gdx.files.internal("rain.mp3"));
-		bucket = new Bucket();
+		player = new Player();
 		rainMusic.setLooping(true);
 		camera = new OrthographicCamera();
 		camera.setToOrtho(true, 800, 480);
@@ -40,13 +40,13 @@ public class Drop extends Game {
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
-		bucket.update(batch);
+		player.update(batch);
 		batch.end();
 		if(Gdx.input.isTouched()){
 			Vector3 touchPos = new Vector3();
 			//bucketPos.set(bucket.x, bucket.y, 0);
 			touchPos.set(Gdx.input.getX(), Gdx.input.getY(), 0);
-			bucket.move(touchPos);
+			player.move(touchPos);
 			camera.unproject(touchPos);
 		}
 	}

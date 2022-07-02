@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.useVsync(true);
 		config.setForegroundFPS(60);
 		config.setTitle("Probably_Shooter");
-		new Lwjgl3Application(new Drop(), config);
+		new Lwjgl3Application(new GameField(), config);
 	}
 }
